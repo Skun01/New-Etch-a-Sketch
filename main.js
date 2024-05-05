@@ -2,11 +2,35 @@
 const screenElem = document.querySelector(".screen");
 const resetElem = document.querySelector("#reset");
 const setupElem = document.querySelector("#setup");
-
+const ledElem = document.querySelector('.noti-led');
 const pixel = 16;
-makeScreen(screenElem, pixel);
+let cellColor = 'green';
+let isColorChange = false;
 
-screenElem.addEventListener('mouseover', changeCellColor);
+
+makeScreen(screenElem, pixel);
+resetElem.addEventListener('click', e =>{
+    const cellList = [...document.querySelectorAll('.cell')];
+    cellList.forEach(cell=>{
+        cell.style.backgroundColor = 'black';
+    });
+    isColorChange = false;
+    ledElem.style.setProperty('--led-color', 'red');
+});
+setupElem.addEventListener('click', e =>{
+    let inputPixel;
+    const regex = /[a-zA-Z]/;
+    do{
+        inputPixel = prompt("Enter your pixel (about 16 - 100):");
+        if(!inputPixel) break;
+    }while(regex.test(inputPixel) || +inputPixel < 16 || +inputPixel > 100);
+    inputPixel = +inputPixel;
+    screenElem.innerHTML = '';
+    makeScreen(screenElem, inputPixel);
+});
+
+screenElem.addEventListener('mousemove', changeCellColor);
+screenElem.addEventListener('dblclick', changeLedColor);
 
 function makeScreen(screenElem, pixel){
     console.log("hi");
@@ -21,8 +45,14 @@ function makeScreen(screenElem, pixel){
         screenElem.appendChild(row);
     }
 }
-let cellColor = 'green';
+
+function changeLedColor(e){
+    isColorChange = !isColorChange;
+    let ledColor = isColorChange ? 'green' : 'red';
+    ledElem.style.setProperty('--led-color', ledColor);
+
+}
 function changeCellColor(e){
     if(e.target === screenElem) return;
-    e.target.style.backgroundColor = cellColor;
+    if(isColorChange) e.target.style.backgroundColor = cellColor;
 }
