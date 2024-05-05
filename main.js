@@ -3,6 +3,11 @@ const screenElem = document.querySelector(".screen");
 const resetElem = document.querySelector("#reset");
 const setupElem = document.querySelector("#setup");
 const ledElem = document.querySelector('.noti-led');
+
+const instrElem = document.querySelector('#instr')
+const instrContainerElem = document.querySelector('.instr-container');
+
+
 const pixel = 16;
 let cellColor = 'green';
 let isColorChange = false;
@@ -31,6 +36,14 @@ setupElem.addEventListener('click', e =>{
 
 screenElem.addEventListener('mousemove', changeCellColor);
 screenElem.addEventListener('dblclick', changeLedColor);
+
+instrElem.addEventListener('click', e=>{
+    instrContainerElem.style.display = 'flex';
+});
+instrContainerElem.addEventListener('click', e=>{
+    if(e.target !== instrContainerElem) return;
+    instrContainerElem.style.display = 'none';
+});
 
 function makeScreen(screenElem, pixel){
     console.log("hi");

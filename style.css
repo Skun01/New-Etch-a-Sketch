@@ -13,7 +13,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 5px;
+    position: relative;
 }
 
 .container{
@@ -26,6 +26,7 @@ body{
     display: flex;
     flex-direction: column;
     padding: 30px 30px 0px 30px;
+    margin-top: 5px;
     position: relative;
 }
 
@@ -85,4 +86,35 @@ body{
 .cell{
     flex: 1;
     width: 100%;
+}
+
+.instr-container{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+
+.instr-wrapper{
+    background-color: rgb(10, 1, 32);
+    padding: 20px;
+    width: 50%;
+    text-align: center;
+    margin-top: 100px;
+    height: 30%;
+    color: white;
+    border-radius: 30px;
+}
+
+.big-text{
+    font-size: 25px;
+    margin-top: 40px;
+    font-style: italic;
+}
+
+#instruction-text{
+    
 }
