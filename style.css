@@ -59,13 +59,27 @@ body{
     gap: 10px;
 }
 
+#colorful-mode{
+    text-align: center;
+    position: absolute;
+    width: 120px;
+    left: 2px;
+}
+
+
+
 .btn{
     border-radius: 5px;
     cursor: pointer;
     padding: 5px 20px;
     background-color: rgba(14, 125, 189, 0.651);
+    transition: all 0.2s;
 }
 
+.active-btn{
+    background-color: rgb(5, 5, 54);
+    color: red;
+}
 .main-btn{
     padding: 30px;
     background-color: rgb(54, 82, 10);
@@ -96,6 +110,7 @@ body{
     display: flex;
     justify-content: center;
     display: none;
+    transition: all 0.2s;
 }
 
 .instr-wrapper{

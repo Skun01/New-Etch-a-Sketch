@@ -3,14 +3,20 @@ const screenElem = document.querySelector(".screen");
 const resetElem = document.querySelector("#reset");
 const setupElem = document.querySelector("#setup");
 const ledElem = document.querySelector('.noti-led');
+const colorfulBtn = document.querySelector('#colorful-mode');
 
 const instrElem = document.querySelector('#instr')
 const instrContainerElem = document.querySelector('.instr-container');
 
 
 const pixel = 16;
-let cellColor = 'green';
 let isColorChange = false;
+let colorfulMode = false;
+
+colorfulBtn.addEventListener('click', e=>{
+    colorfulBtn.classList.toggle('active-btn');
+    colorfulMode = !colorfulMode;
+});
 
 
 makeScreen(screenElem, pixel);
@@ -27,15 +33,22 @@ setupElem.addEventListener('click', e =>{
     const regex = /[a-zA-Z]/;
     do{
         inputPixel = prompt("Enter your pixel (about 16 - 100):");
-        if(!inputPixel) break;
     }while(regex.test(inputPixel) || +inputPixel < 16 || +inputPixel > 100);
     inputPixel = +inputPixel;
     screenElem.innerHTML = '';
     makeScreen(screenElem, inputPixel);
 });
 
-screenElem.addEventListener('mousemove', changeCellColor);
-screenElem.addEventListener('dblclick', changeLedColor);
+
+screenElem.addEventListener('mousemove', e=>{
+    function rand(){
+        return Math.floor(Math.random()*256);
+    }
+    let cellColor = colorfulMode? `rgb(${rand()}, ${rand()}, ${rand()})` : 'green';
+    if(e.target === screenElem) return;
+    if(isColorChange) e.target.style.backgroundColor = cellColor;
+});
+screenElem.addEventListener('click', changeLedColor);
 
 instrElem.addEventListener('click', e=>{
     instrContainerElem.style.display = 'flex';
@@ -64,8 +77,4 @@ function changeLedColor(e){
     let ledColor = isColorChange ? 'green' : 'red';
     ledElem.style.setProperty('--led-color', ledColor);
 
-}
-function changeCellColor(e){
-    if(e.target === screenElem) return;
-    if(isColorChange) e.target.style.backgroundColor = cellColor;
 }
