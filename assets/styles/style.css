@@ -14,6 +14,7 @@ body{
     align-items: center;
     justify-content: center;
     position: relative;
+    background-image: url('../img/repeat\ img.jpg');
 }
 
 .container{
@@ -43,7 +44,7 @@ body{
 
 .screen{
     display: flex;
-    background-color: black;
+    background-color: white;
     flex: 1;
     border-radius: 10px;
     flex-wrap: wrap;
@@ -65,8 +66,6 @@ body{
     width: 120px;
     left: 2px;
 }
-
-
 
 .btn{
     border-radius: 5px;
@@ -100,6 +99,7 @@ body{
 .cell{
     flex: 1;
     width: 100%;
+    opacity: 1;
 }
 
 .instr-container{
@@ -111,6 +111,7 @@ body{
     justify-content: center;
     display: none;
     transition: all 0.2s;
+    
 }
 
 .instr-wrapper{

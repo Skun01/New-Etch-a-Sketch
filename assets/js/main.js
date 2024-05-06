@@ -24,6 +24,7 @@ resetElem.addEventListener('click', e =>{
     const cellList = [...document.querySelectorAll('.cell')];
     cellList.forEach(cell=>{
         cell.style.backgroundColor = 'black';
+        cell.style.opacity = '1';
     });
     isColorChange = false;
     ledElem.style.setProperty('--led-color', 'red');
@@ -48,7 +49,16 @@ screenElem.addEventListener('mousemove', e=>{
     if(e.target === screenElem) return;
     if(isColorChange) e.target.style.backgroundColor = cellColor;
 });
-screenElem.addEventListener('click', changeLedColor);
+screenElem.addEventListener('dblclick', changeLedColor);
+screenElem.addEventListener('click', e=>{
+    if(e.target === screenElem) return;
+    if(e.ctrlKey){
+        let reduceTest = e.target.style.opacity;
+        console.log(reduceTest);
+        e.target.style.opacity = `${reduceTest - 0.1}`;
+        
+    }
+});
 
 instrElem.addEventListener('click', e=>{
     instrContainerElem.style.display = 'flex';
@@ -66,6 +76,7 @@ function makeScreen(screenElem, pixel){
         for(let j =  0; j < pixel; j++){
             const cell = document.createElement("div");
             cell.classList.add('cell');
+            cell.style.opacity = '1';
             row.appendChild(cell);
         }
         screenElem.appendChild(row);
@@ -73,6 +84,7 @@ function makeScreen(screenElem, pixel){
 }
 
 function changeLedColor(e){
+    if(e.ctrlKey) return;
     isColorChange = !isColorChange;
     let ledColor = isColorChange ? 'green' : 'red';
     ledElem.style.setProperty('--led-color', ledColor);
